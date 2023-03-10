@@ -2,13 +2,13 @@
 import './App.css';
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import LoginPage from './Source/LoginPage';
-import ItemPage from './Source/item';
-import SignUpPage from './Source/SignUp';
-import DashboardContent from './Source/Dashboard';
-import SalesPage from './Source/Sales';
-import ReportContent from './Source/reports';
-import CutomersList from './Source/Customers'
+import LoginPage from './Source/Login/LoginPage';
+import ItemPage from './Source/User/item';
+import SignUpPage from './Source/Login/SignUp';
+import DashboardContent from './Source/Admin/Dashboard';
+import SalesPage from './Source/Admin/Sales';
+import ReportContent from './Source/Admin/reports';
+import CutomersList from './Source/Admin/Customers'
 
 
 function App() {
