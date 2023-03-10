@@ -8,7 +8,7 @@ import SignUpPage from './Source/Login/SignUp';
 import DashboardContent from './Source/Admin/Dashboard';
 import SalesPage from './Source/Admin/Sales';
 import ReportContent from './Source/Admin/reports';
-import CutomersList from './Source/Admin/Customers'
+import CutomersList from './Source/Admin/Customers';
 
 
 function App() {
@@ -22,7 +22,7 @@ function App() {
         <Route exact path="/dashboard" component={DashboardContent} />
         <Route exact path="/sales" component={SalesPage} />
         <Route exact path="/reports" component={ReportContent} />
-        <Route exact path="/customers" component={CutomersList}/>
+        <Route exact path="/customers" component={CutomersList} />
       </Switch>
     </Router>
   );
