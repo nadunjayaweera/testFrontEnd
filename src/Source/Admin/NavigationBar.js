@@ -16,7 +16,6 @@ import Link from '@mui/material/Link';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { mainListItems } from './listitems';
-import Chart from './chart';
 
 
 function Copyright(props) {
