@@ -1,7 +1,7 @@
 // import logo from './logo.svg';
 import './App.css';
 
-import { BrowserRouter as Router, Switch, Route, useHistory } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import LoginPage from './Source/LoginPage';
 import ItemPage from './Source/item';
 import SignUpPage from './Source/SignUp';
