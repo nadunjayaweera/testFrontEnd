@@ -56,8 +56,8 @@ export default function StripedGrid({ rows, columns }) {
   return (
     <div style={{ height: 400, width: '100%' }}>
       <StripedDataGrid
-        {...rows}
-        {...columns}
+        rows={rows}
+        columns={columns}
         onCellDoubleClick={handleCellDoubleClick}
         editRowsModel={editRowsModel}
         onEditRowsModelChange={(newModel) => setEditRowsModel(newModel)}
