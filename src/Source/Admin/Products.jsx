@@ -14,7 +14,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { mainListItems } from './listitems';
 import { AppBar, Drawer, mdTheme, Copyright } from './Structure';
-import  StripedGrid  from './productlist';
+import  ProductList  from './productlist';
 
 
 export default function Products() {
@@ -92,7 +92,7 @@ export default function Products() {
             <Grid container spacing={3}>
               <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                  <StripedGrid />
+                  <ProductList />
                 </Paper>
               </Grid>
             </Grid>

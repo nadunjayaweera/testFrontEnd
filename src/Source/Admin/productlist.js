@@ -37,21 +37,58 @@ const StripedDataGrid = styled(DataGrid)(({ theme }) => ({
   },
 }));
 
-export default function StripedGrid({ rows, columns }) {
+const dummyProducts = [
+  {
+    id: 1,
+    name: 'Product 1',
+    category: 'Category 1',
+    price: 10.99,
+  },
+  {
+    id: 2,
+    name: 'Product 2',
+    category: 'Category 2',
+    price: 19.99,
+  },
+  {
+    id: 3,
+    name: 'Product 3',
+    category: 'Category 1',
+    price: 5.99,
+  },
+];
+
+export default function ProductList() {
   const [editRowsModel, setEditRowsModel] = React.useState({});
-  
-  const handleCellDoubleClick = React.useCallback(
-    (params, event) => {
-      const rowId = params.id;
-      const field = params.field;
-      const editedRows = {
-        ...editRowsModel,
-        [rowId]: { ...editRowsModel[rowId], [field]: event.target.value },
-      };
-      setEditRowsModel(editedRows);
-    },
-    [editRowsModel],
-  );
+
+  const columns = [
+    { field: 'id', headerName: 'ID', width: 70 },
+    { field: 'name', headerName: 'Product Name', width: 200 },
+    { field: 'category', headerName: 'Category', width: 130 },
+    { field: 'price', headerName: 'Price ($)', type: 'number', width: 120 },
+  ];
+
+  const rows = dummyProducts.map((product) => ({
+    id: product.id,
+    name: product.name,
+    category: product.category,
+    price: product.price,
+  }));
+
+ const handleCellDoubleClick = React.useCallback(
+  (params) => {
+     console.log("click click");
+    const rowId = params.id;
+    const field = params.field;
+    const editedRows = {
+      ...editRowsModel,
+      [rowId]: { ...editRowsModel[rowId], [field]: params.value },
+    };
+    setEditRowsModel(editedRows);
+  },
+  [editRowsModel],
+);
+
 
   return (
     <div style={{ height: 400, width: '100%' }}>
