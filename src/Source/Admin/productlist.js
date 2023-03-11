@@ -40,21 +40,24 @@ const StripedDataGrid = styled(DataGrid)(({ theme }) => ({
 const dummyProducts = [
   {
     id: 1,
-    name: 'Product 1',
-    category: 'Category 1',
-    price: 10.99,
+    name: 'Chocolate Chip Cookies',
+    quantity: '20',
+    price: 580,
+    weight: 200,
   },
   {
     id: 2,
-    name: 'Product 2',
-    category: 'Category 2',
-    price: 19.99,
+    name: 'Dairy Milk',
+    quantity: '5',
+    price: 100,
+    weight: 35,
   },
   {
     id: 3,
-    name: 'Product 3',
-    category: 'Category 1',
-    price: 5.99,
+    name: 'Toffee Crisp',
+    quantity: '30',
+    price: 165,
+    weight: 30,
   },
 ];
 
@@ -63,31 +66,40 @@ export default function ProductList() {
 
   const columns = [
     { field: 'id', headerName: 'ID', width: 70 },
-    { field: 'name', headerName: 'Product Name', width: 200 },
-    { field: 'category', headerName: 'Category', width: 130 },
-    { field: 'price', headerName: 'Price ($)', type: 'number', width: 120 },
+    { field: 'name', headerName: 'Product Name', width: 200, editable: true },
+    { field: 'quantity', headerName: 'Quantity', width: 130, type: 'number', editable: true },
+    { field: 'price', headerName: 'Price (Rs.)', type: 'number', width: 120, editable: true },
+    { field: 'weight', headerName: 'Weight (g.)', type: 'number', width: 120, editable: true },
   ];
 
   const rows = dummyProducts.map((product) => ({
     id: product.id,
     name: product.name,
-    category: product.category,
+    quantity: product.quantity,
     price: product.price,
+    weight: product.weight,
   }));
 
  const handleCellDoubleClick = React.useCallback(
   (params) => {
-     console.log("click click");
     const rowId = params.id;
     const field = params.field;
+    const isCellEditable = params.colDef.editable !== false;
+
+    if (!isCellEditable) {
+      return;
+    }
+
     const editedRows = {
       ...editRowsModel,
       [rowId]: { ...editRowsModel[rowId], [field]: params.value },
     };
+
     setEditRowsModel(editedRows);
   },
-  [editRowsModel],
+  [editRowsModel]
 );
+
 
 
   return (
