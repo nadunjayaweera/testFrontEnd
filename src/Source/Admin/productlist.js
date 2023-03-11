@@ -44,6 +44,7 @@ const dummyProducts = [
     quantity: '20',
     price: 580,
     weight: 200,
+    image: "http://cdn.shopify.com/s/files/1/0260/6877/9066/products/100895_f7ed1085-0cc9-4f5e-a25d-771509b1b168.jpg?v=1627811177?auto=format&fit=crop&w=286",
   },
   {
     id: 2,
@@ -51,6 +52,8 @@ const dummyProducts = [
     quantity: '5',
     price: 100,
     weight: 35,
+    image:"https://cmhlprodblobstorage1.blob.core.windows.net/sys-master-cmhlprodblobstorage1/h10/ha7/9030481281054/cmhl_1000000340844_1_hero.jpg_Default-WorkingFormat_1000Wx1000H?auto=format&fit=crop&w=286",
+   
   },
   {
     id: 3,
@@ -58,6 +61,7 @@ const dummyProducts = [
     quantity: '30',
     price: 165,
     weight: 30,
+    image:"https://www.britishcornershop.co.uk/img/large/CY0273.jpg?auto=format&fit=crop&w=286",
   },
 ];
 
@@ -70,6 +74,15 @@ export default function ProductList() {
     { field: 'quantity', headerName: 'Quantity', width: 130, type: 'number', editable: true },
     { field: 'price', headerName: 'Price (Rs.)', type: 'number', width: 120, editable: true },
     { field: 'weight', headerName: 'Weight (g.)', type: 'number', width: 120, editable: true },
+    {
+    field: 'image',
+      headerName: 'Image',
+    editable:true,
+    width: 150,
+    renderCell: (params) => (
+      <img src={params.row.image} alt={params.row.name} style={{ width: 100, height: 100 }} />
+    ),
+  },
   ];
 
   const rows = dummyProducts.map((product) => ({
@@ -78,6 +91,7 @@ export default function ProductList() {
     quantity: product.quantity,
     price: product.price,
     weight: product.weight,
+    image: product.image,
   }));
 
  const handleCellDoubleClick = React.useCallback(
