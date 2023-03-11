@@ -48,11 +48,14 @@ export const mainListItems = (
         </ListItemButton>
     </Link>
             
+    <Link to="/products" style={{textDecoration:'none', color:'inherit'}}>
     <ListItemButton>
       <ListItemIcon>
         <AddBoxIcon />
       </ListItemIcon>
-      <ListItemText primary="Add Item" />
-    </ListItemButton>
+      <ListItemText primary="Products" />
+      </ListItemButton>
+      </Link>
   </React.Fragment>
+  
 );

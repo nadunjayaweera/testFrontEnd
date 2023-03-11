@@ -17,7 +17,7 @@ import { mainListItems } from './listitems';
 import { AppBar, Drawer, mdTheme, Copyright } from './Structure';
 
 
-export default function DashboardContent() {
+export default function Reports() {
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
