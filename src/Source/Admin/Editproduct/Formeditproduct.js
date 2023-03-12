@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@mui/styles';
 import { Button, TextField, Grid, Typography } from '@mui/material';
+import { useLocation } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -21,6 +22,8 @@ const useStyles = makeStyles((theme) => ({
 export default function FormEditProduct() {
   const classes = useStyles();
   const history = useHistory();
+  const location = useLocation();
+  const { product, quantity, price, weight } = location.state;
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -41,7 +44,7 @@ export default function FormEditProduct() {
             id="product-name"
             label="Product Name"
             variant="outlined"
-            defaultValue="Product A"
+            defaultValue={product.name || ""}
           />
         </Grid>
         <Grid item xs={12} md={6}>
@@ -51,7 +54,7 @@ export default function FormEditProduct() {
             label="Quantity"
             variant="outlined"
             type="number"
-            defaultValue={10}
+            defaultValue={product.quantity||""}
           />
         </Grid>
         <Grid item xs={12} md={6}>
@@ -61,7 +64,7 @@ export default function FormEditProduct() {
             label="Price"
             variant="outlined"
             type="number"
-            defaultValue={100}
+            defaultValue={product.price||""}
           />
         </Grid>
         <Grid item xs={12} md={6}>
@@ -71,18 +74,7 @@ export default function FormEditProduct() {
             label="Weight"
             variant="outlined"
             type="number"
-            defaultValue={200}
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <TextField
-            fullWidth
-            id="product-description"
-            label="Description"
-            variant="outlined"
-            multiline
-            rows={4}
-            defaultValue="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla aliquam justo nec ex bibendum maximus. Curabitur quis risus at massa suscipit facilisis. Duis nec erat nec dolor bibendum viverra sit amet ut velit. Donec scelerisque enim eu ipsum placerat malesuada. Cras lacinia enim vel est tristique, et tincidunt elit malesuada. Aliquam eget eros ac risus malesuada pharetra. Sed varius augue nec est facilisis ullamcorper. Nunc convallis tortor sed dolor vestibulum malesuada. Nunc non lacinia risus."
+            defaultValue={product.weight||""}
           />
         </Grid>
         <Grid item xs={12} className={classes.buttonContainer}>
