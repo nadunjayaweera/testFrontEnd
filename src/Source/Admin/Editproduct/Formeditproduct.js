@@ -1,77 +1,96 @@
 import * as React from 'react';
-import { CssVarsProvider } from '@mui/joy/styles';
-import Sheet from '@mui/joy/Sheet';
-import Typography from '@mui/joy/Typography';
-import FormControl from '@mui/joy/FormControl';
-import FormLabel from '@mui/joy/FormLabel';
-import Input from '@mui/joy/Input';
-import Button from '@mui/joy/Button';
-import Link from '@mui/joy/Link';
 import { useHistory } from 'react-router-dom';
+import { makeStyles } from '@mui/styles';
+import { Button, TextField, Grid, Typography } from '@mui/material';
 
+const useStyles = makeStyles((theme) => ({
+  container: {
+    padding: theme.spacing(3),
+  },
+  buttonContainer: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+    marginTop: theme.spacing(3),
+  },
+  formControl: {
+    marginBottom: theme.spacing(2),
+    minWidth: 120,
+  },
+}));
 
-export default function FormEditproducts() {
+export default function FormEditProduct() {
+  const classes = useStyles();
   const history = useHistory();
-  const handleSignUp = () => {
-    history.push('/item');
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // TODO: Handle form submission logic
   };
+
   return (
-    <CssVarsProvider>
-      <main>
-        <Sheet
-          sx={{
-            width: 300,
-            mx: 'auto', // margin left & right
-            my: 4, // margin top & botom
-            py: 3, // padding top & bottom
-            px: 2, // padding left & right
-            display: 'flex',
-            flexDirection: 'column',
-            gap: 2,
-            borderRadius: 'sm',
-            boxShadow: 'md',
-          }}
-          variant="outlined"
-        >
-          <FormControl>
-  <FormLabel>Product Name</FormLabel>
-  <Input
-    // html input attribute
-    name="firstName"
-    type="text"
-  />
-</FormControl>
-<FormControl>
-  <FormLabel>Quantity</FormLabel>
-  <Input
-    // html input attribute
-    name="lastName"
-    type="text"
-  />
-</FormControl>
-
-    <FormControl>
-    <FormLabel>Price (RS.)</FormLabel>
-    <Input
-        // html input attribute
-        name="email"
-        type="email"
-    />
-    </FormControl>
-    <FormControl>
-    <FormLabel>Weight</FormLabel>
-    <Input
-        // html input attribute
-        name="password"
-        type="password"
-    />
-    </FormControl>
-
-          <Button sx={{ mt: 1 /* margin top */ }} onClick={handleSignUp}>
-            Sign up
+    <form onSubmit={handleSubmit}>
+      <Grid container spacing={3} className={classes.container}>
+        <Grid item xs={12}>
+          <Typography variant="h4" component="h1">
+            Edit Product
+          </Typography>
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <TextField
+            fullWidth
+            id="product-name"
+            label="Product Name"
+            variant="outlined"
+            defaultValue="Product A"
+          />
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <TextField
+            fullWidth
+            id="product-quantity"
+            label="Quantity"
+            variant="outlined"
+            type="number"
+            defaultValue={10}
+          />
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <TextField
+            fullWidth
+            id="product-price"
+            label="Price"
+            variant="outlined"
+            type="number"
+            defaultValue={100}
+          />
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <TextField
+            fullWidth
+            id="product-weight"
+            label="Weight"
+            variant="outlined"
+            type="number"
+            defaultValue={200}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <TextField
+            fullWidth
+            id="product-description"
+            label="Description"
+            variant="outlined"
+            multiline
+            rows={4}
+            defaultValue="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla aliquam justo nec ex bibendum maximus. Curabitur quis risus at massa suscipit facilisis. Duis nec erat nec dolor bibendum viverra sit amet ut velit. Donec scelerisque enim eu ipsum placerat malesuada. Cras lacinia enim vel est tristique, et tincidunt elit malesuada. Aliquam eget eros ac risus malesuada pharetra. Sed varius augue nec est facilisis ullamcorper. Nunc convallis tortor sed dolor vestibulum malesuada. Nunc non lacinia risus."
+          />
+        </Grid>
+        <Grid item xs={12} className={classes.buttonContainer}>
+          <Button variant="contained" color="primary">
+            Save Changes
           </Button>
-        </Sheet>
-      </main>
-    </CssVarsProvider>
+        </Grid>
+      </Grid>
+    </form>
   );
 }
