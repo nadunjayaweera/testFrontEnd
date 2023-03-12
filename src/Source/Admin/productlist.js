@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { alpha, styled } from '@mui/material/styles';
 import { DataGrid, gridClasses } from '@mui/x-data-grid';
+import { Link } from 'react-router-dom';
+import EditIcon from '@mui/icons-material/Edit';
 
 const ODD_OPACITY = 0.2;
 
@@ -76,12 +78,23 @@ export default function ProductList() {
     { field: 'weight', headerName: 'Weight (g.)', type: 'number', width: 120 },
     {
     field: 'image',
-      headerName: 'Image',
+    headerName: 'Image',
     width: 150,
     renderCell: (params) => (
       <img src={params.row.image} alt={params.row.name} style={{ width: 100, height: 100 }} />
     ),
-  },
+    },
+    {
+      field: 'action',
+      headerName: 'Action',
+      sortable: false,
+      width: 120,
+      renderCell: (params) => (
+        <Link to={`/products/edit/${params.id}`}>
+          <EditIcon />
+        </Link>),
+    },
+    
   ];
 
   const rows = dummyProducts.map((product) => ({
