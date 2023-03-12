@@ -70,14 +70,13 @@ export default function ProductList() {
 
   const columns = [
     { field: 'id', headerName: 'ID', width: 70 },
-    { field: 'name', headerName: 'Product Name', width: 200, editable: true },
-    { field: 'quantity', headerName: 'Quantity', width: 130, type: 'number', editable: true },
-    { field: 'price', headerName: 'Price (Rs.)', type: 'number', width: 120, editable: true },
-    { field: 'weight', headerName: 'Weight (g.)', type: 'number', width: 120, editable: true },
+    { field: 'name', headerName: 'Product Name', width: 200 },
+    { field: 'quantity', headerName: 'Quantity', width: 130, type: 'number'},
+    { field: 'price', headerName: 'Price (Rs.)', type: 'number', width: 120},
+    { field: 'weight', headerName: 'Weight (g.)', type: 'number', width: 120 },
     {
     field: 'image',
       headerName: 'Image',
-    editable:true,
     width: 150,
     renderCell: (params) => (
       <img src={params.row.image} alt={params.row.name} style={{ width: 100, height: 100 }} />
@@ -94,34 +93,11 @@ export default function ProductList() {
     image: product.image,
   }));
 
- const handleCellDoubleClick = React.useCallback(
-  (params) => {
-    const rowId = params.id;
-    const field = params.field;
-    const isCellEditable = params.colDef.editable !== false;
-
-    if (!isCellEditable) {
-      return;
-    }
-
-    const editedRows = {
-      ...editRowsModel,
-      [rowId]: { ...editRowsModel[rowId], [field]: params.value },
-    };
-
-    setEditRowsModel(editedRows);
-  },
-  [editRowsModel]
-);
-
-
-
   return (
     <div style={{ height: 400, width: '100%' }}>
       <StripedDataGrid
         rows={rows}
         columns={columns}
-        onCellDoubleClick={handleCellDoubleClick}
         editRowsModel={editRowsModel}
         onEditRowsModelChange={(newModel) => setEditRowsModel(newModel)}
       />
