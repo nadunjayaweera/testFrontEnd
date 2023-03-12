@@ -12,12 +12,12 @@ import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import { mainListItems } from './listitems';
-import { AppBar, Drawer, mdTheme, Copyright } from './Structure';
-import  ProductList  from './productlist';
+import { mainListItems } from '../Dashboard/listitems';
+import { AppBar, Drawer, mdTheme, Copyright } from '../Structure';
+import Users from './Userlist';
 
 
-export default function Products() {
+export default function Customers() {
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
@@ -92,7 +92,7 @@ export default function Products() {
             <Grid container spacing={3}>
               <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                  <ProductList />
+                  <Users />
                 </Paper>
               </Grid>
             </Grid>

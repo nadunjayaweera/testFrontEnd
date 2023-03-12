@@ -1,4 +1,4 @@
-import Chart from './chart';
+import Chart from '../Reports/chart';
 import * as React from 'react';
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -14,10 +14,11 @@ import Paper from '@mui/material/Paper';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { mainListItems } from './listitems';
-import { AppBar, Drawer, mdTheme, Copyright } from './Structure';
+import Orders from '../Sales/Orders';
+import { AppBar, Drawer, mdTheme, Copyright } from '../Structure';
 
 
-export default function Reports() {
+export default function DashboardContent() {
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
@@ -52,7 +53,7 @@ export default function Reports() {
               noWrap
               sx={{ flexGrow: 1 }}
             >
-              Reports
+              Dashboard
             </Typography>
           </Toolbar>
         </AppBar>
@@ -102,6 +103,11 @@ export default function Reports() {
                 >
                   <Chart />
                   </Paper>
+              </Grid>
+              <Grid item xs={12}>
+                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
+                  <Orders />
+                </Paper>
               </Grid>
             </Grid>
             <Box sx={{ pt: 4 }}>

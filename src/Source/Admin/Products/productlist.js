@@ -90,7 +90,7 @@ export default function ProductList() {
       sortable: false,
       width: 120,
       renderCell: (params) => (
-        <Link to={`/products/edit/${params.id}`}>
+        <Link to={`/products/edit/${params.row.id}`}>
           <EditIcon />
         </Link>),
     },

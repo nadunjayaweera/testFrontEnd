@@ -1,4 +1,3 @@
-import Chart from './chart';
 import * as React from 'react';
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -13,12 +12,12 @@ import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import { mainListItems } from './listitems';
-import Orders from './Orders';
-import { AppBar, Drawer, mdTheme, Copyright } from './Structure';
+import { mainListItems } from '../Dashboard/listitems';
+import { AppBar, Drawer, mdTheme, Copyright } from '../Structure';
+import  ProductList  from './productlist';
 
 
-export default function DashboardContent() {
+export default function Products() {
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
@@ -53,7 +52,7 @@ export default function DashboardContent() {
               noWrap
               sx={{ flexGrow: 1 }}
             >
-              Dashboard
+              Customers
             </Typography>
           </Toolbar>
         </AppBar>
@@ -91,22 +90,9 @@ export default function DashboardContent() {
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Grid container spacing={3}>
-              {Chart}
-              <Grid item xs={12}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    height:240,
-                  }}
-                >
-                  <Chart />
-                  </Paper>
-              </Grid>
               <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                  <Orders />
+                  <ProductList />
                 </Paper>
               </Grid>
             </Grid>
