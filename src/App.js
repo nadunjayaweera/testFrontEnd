@@ -10,7 +10,7 @@ import Customers from './Source/Admin/Customers/Customers';
 import Sales from './Source/Admin/Sales/Sales';
 import ItemList from './Source/User/item';
 import Products from './Source/Admin/Products/Products';
-import EditItem from './Source/Admin/Editproduct';
+import EditItem from './Source/Admin/Editproduct/Editproduct';
 
 function App() {
 

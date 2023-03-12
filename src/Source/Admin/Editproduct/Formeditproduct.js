@@ -10,7 +10,7 @@ import Link from '@mui/joy/Link';
 import { useHistory } from 'react-router-dom';
 
 
-export default function EditItem() {
+export default function FormEditproducts() {
   const history = useHistory();
   const handleSignUp = () => {
     history.push('/item');
@@ -33,60 +33,43 @@ export default function EditItem() {
           }}
           variant="outlined"
         >
-          <div>
-            <Typography level="h4" component="h1">
-              <b>Sign Up</b>
-            </Typography>
-            <Typography level="body2">Create a new account.</Typography>
-          </div>
           <FormControl>
-  <FormLabel>First Name</FormLabel>
+  <FormLabel>Product Name</FormLabel>
   <Input
     // html input attribute
     name="firstName"
     type="text"
-    placeholder="Nadun"
   />
 </FormControl>
 <FormControl>
-  <FormLabel>Last Name</FormLabel>
+  <FormLabel>Quantity</FormLabel>
   <Input
     // html input attribute
     name="lastName"
     type="text"
-    placeholder="Jayaweera"
   />
 </FormControl>
 
-          <FormControl>
-            <FormLabel>Email</FormLabel>
-            <Input
-              // html input attribute
-              name="email"
-              type="email"
-              placeholder="nadun@gmail.com"
-            />
-          </FormControl>
-          <FormControl>
-            <FormLabel>Password</FormLabel>
-            <Input
-              // html input attribute
-              name="password"
-              type="password"
-              placeholder="password"
-            />
-          </FormControl>
+    <FormControl>
+    <FormLabel>Price (RS.)</FormLabel>
+    <Input
+        // html input attribute
+        name="email"
+        type="email"
+    />
+    </FormControl>
+    <FormControl>
+    <FormLabel>Weight</FormLabel>
+    <Input
+        // html input attribute
+        name="password"
+        type="password"
+    />
+    </FormControl>
 
           <Button sx={{ mt: 1 /* margin top */ }} onClick={handleSignUp}>
             Sign up
           </Button>
-          <Typography
-            endDecorator={<Link href="/">Log in</Link>}
-            fontSize="sm"
-            sx={{ alignSelf: 'center' }}
-          >
-            Already have an account?
-          </Typography>
         </Sheet>
       </main>
     </CssVarsProvider>
