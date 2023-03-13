@@ -14,6 +14,10 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'flex-end',
     marginTop: theme.spacing(3),
   },
+  imageContainer: { 
+    border: '1px solid black',
+    padding: theme.spacing(1),
+  },
   formControl: {
     marginBottom: theme.spacing(2),
     minWidth: 120,
@@ -93,12 +97,23 @@ export default function FormEditProduct() {
             accept="image/*"
             onChange={handleImageUpload}
           />
-        </div>
-        {image && (
-          <div>
+          </div>
+          
+          <Grid item xs={12} md={6}>
+            <div className={classes.imageContainer}>
+              {image && (
+            <div>
             <img src={URL.createObjectURL(image)} alt="product image" />
           </div>
-        )}
+          )}
+          {!image && (<div>
+                <img
+              src={product.image} alt = "product image"
+            />
+          </div>)}
+          </div>
+          </Grid>  
+        
         </Grid>
         <Grid item xs={12} className={classes.buttonContainer}>
           <Button variant="contained" color="primary">
