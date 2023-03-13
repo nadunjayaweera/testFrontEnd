@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@mui/styles';
 import { Button, TextField, Grid, Typography } from '@mui/material';
 import { useLocation } from 'react-router-dom';
+import { useState } from 'react';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -23,8 +24,14 @@ export default function FormEditProduct() {
   const classes = useStyles();
   const history = useHistory();
   const location = useLocation();
-  const { product, quantity, price, weight } = location.state;
+  const { product } = location.state;
 
+  const [image, setImage] = useState(null);
+
+  const handleImageUpload = (event) => {
+    const file = event.target.files[0];
+    setImage(file);
+  };
   const handleSubmit = (event) => {
     event.preventDefault();
     // TODO: Handle form submission logic
@@ -76,6 +83,22 @@ export default function FormEditProduct() {
             type="number"
             defaultValue={product.weight||""}
           />
+        </Grid>
+        <Grid item xs={12} md={6}>
+         <div>
+          <label htmlFor="image-upload">Product Image</label>
+          <input
+            id="image-upload"
+            type="file"
+            accept="image/*"
+            onChange={handleImageUpload}
+          />
+        </div>
+        {image && (
+          <div>
+            <img src={URL.createObjectURL(image)} alt="product image" />
+          </div>
+        )}
         </Grid>
         <Grid item xs={12} className={classes.buttonContainer}>
           <Button variant="contained" color="primary">
