@@ -113,7 +113,7 @@ export default function ProductList() {
 },
 
     
-  ];
+];
   
 
 const [rows, setRows] = React.useState(dummyProducts.map((product) => ({

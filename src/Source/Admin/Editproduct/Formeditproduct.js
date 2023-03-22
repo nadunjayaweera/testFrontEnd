@@ -4,6 +4,7 @@ import { makeStyles } from '@mui/styles';
 import { Button, TextField, Grid, Typography } from '@mui/material';
 import { useLocation } from 'react-router-dom';
 import { useState } from 'react';
+import Box from '@mui/material/Box';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -15,8 +16,10 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(3),
   },
   imageContainer: { 
-    border: '1px solid black',
+    border: `1px solid ${theme.palette.grey[500]}`, // Set border color to grey[500]
+    borderRadius: theme.shape.borderRadius, // Set border radius to match theme shape
     padding: theme.spacing(1),
+    position: 'relative', // Set position to relative so we can position the background line absolutely
   },
   formControl: {
     marginBottom: theme.spacing(2),
@@ -89,7 +92,8 @@ export default function FormEditProduct() {
           />
         </Grid>
         <Grid item xs={12} md={6}>
-         <div>
+          <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', pb: 2 }}>
+            <div>
           <label htmlFor="image-upload">Product Image </label>
           <input
             id="image-upload"
@@ -98,6 +102,7 @@ export default function FormEditProduct() {
             onChange={handleImageUpload}
           />
           </div>
+          </Box>
           
           <Grid item xs={12} md={6}>
             <div className={classes.imageContainer}>

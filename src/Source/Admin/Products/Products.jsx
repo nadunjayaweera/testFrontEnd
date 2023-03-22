@@ -14,8 +14,8 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { mainListItems } from '../Dashboard/listitems';
 import { AppBar, Drawer, mdTheme, Copyright } from '../Structure';
-import  ProductList  from './productlist';
-
+import ProductList from './productlist';
+import { Button, TextField } from '@mui/material';
 
 export default function Products() {
   const [open, setOpen] = React.useState(true);
@@ -87,8 +87,15 @@ export default function Products() {
             overflow: 'auto',
           }}
         >
-          <Toolbar />
+          <Toolbar sx={{ mb: 2 }}>
+            <Button variant="contained">Add Item</Button>
+          </Toolbar>
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', pb:2 }}>
+              <Button variant="contained" onClick={() => console.log('Add item clicked!')}>
+                Add Item
+              </Button>
+            </Box>
             <Grid container spacing={3}>
               <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
@@ -97,7 +104,12 @@ export default function Products() {
               </Grid>
             </Grid>
             <Box sx={{ pt: 4 }}>
-              <Copyright />
+              <Typography variant="body2" color="text.secondary" align="center">
+                {'© '}
+                Your Website
+                {' '}
+                {new Date().getFullYear()}
+              </Typography>
             </Box>
           </Container>
         </Box>
@@ -105,3 +117,4 @@ export default function Products() {
     </ThemeProvider>
   );
 }
+
