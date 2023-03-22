@@ -90,7 +90,7 @@ export default function FormEditProduct() {
         </Grid>
         <Grid item xs={12} md={6}>
          <div>
-          <label htmlFor="image-upload">Product Image</label>
+          <label htmlFor="image-upload">Product Image </label>
           <input
             id="image-upload"
             type="file"
@@ -103,12 +103,12 @@ export default function FormEditProduct() {
             <div className={classes.imageContainer}>
               {image && (
             <div>
-            <img src={URL.createObjectURL(image)} alt="product image" />
+            <img src={URL.createObjectURL(image)} alt="product image" style={{maxWidth:200, maxHeight:200}} />
           </div>
           )}
           {!image && (<div>
                 <img
-              src={product.image} alt = "product image"
+              src={product.image} alt = "product image" style={{maxWidth:200, maxHeight:200}}
             />
           </div>)}
           </div>
