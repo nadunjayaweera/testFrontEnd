@@ -52,7 +52,7 @@ export default function Products() {
               noWrap
               sx={{ flexGrow: 1 }}
             >
-              Customers
+              Products
             </Typography>
           </Toolbar>
         </AppBar>

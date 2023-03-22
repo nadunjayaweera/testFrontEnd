@@ -3,6 +3,8 @@ import { alpha, styled } from '@mui/material/styles';
 import { DataGrid, gridClasses } from '@mui/x-data-grid';
 import { Link } from 'react-router-dom';
 import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { IconButton } from '@mui/material';
 
 const ODD_OPACITY = 0.2;
 
@@ -85,33 +87,58 @@ export default function ProductList() {
     ),
     },
     {
-      field: 'action',
-      headerName: 'Action',
-      sortable: false,
-      width: 120,
-      renderCell: (params) => (
-        <Link to={{
-          pathname: `/products/edit/${params.row.id}`, state: {
-            product: params.row
-          }
-        }}>
-      <EditIcon />
-        </Link>
-      ),
-    },
+  field: 'action',
+  headerName: 'Action',
+  sortable: false,
+  width: 120,
+  renderCell: (params) => (
+    <>
+      <Link to={{
+        pathname: `/products/edit/${params.row.id}`,
+        state: {
+          product: params.row
+        }
+      }}>
+        <EditIcon />
+      </Link>
+      <IconButton
+        aria-label="delete"
+        color= "error"
+        onClick={() => handleDelete(params.row.id)}
+      >
+        <DeleteIcon />
+      </IconButton>
+    </>
+  ),
+},
+
     
   ];
+  
 
-  const rows = dummyProducts.map((product) => ({
-    id: product.id,
-    name: product.name,
-    quantity: product.quantity,
-    price: product.price,
-    weight: product.weight,
-    image: product.image,
-  }));
+const [rows, setRows] = React.useState(dummyProducts.map((product) => ({
+  id: product.id,
+  name: product.name,
+  quantity: product.quantity,
+  price: product.price,
+  weight: product.weight,
+  image: product.image,
+})));
+
+  
+  const handleDelete = (id) => {
+   const confirmed = window.confirm("Are you sure you want to delete this row?");
+    if (confirmed) {
+      const newRows = rows.filter(row => row.id !== id);
+      setRows(newRows);
+    }
+}
+<ProductList rows={rows} handleDelete={handleDelete} />
+
+  
 
   return (
+    
     <div style={{ height: 400, width: '100%' }}>
       <StripedDataGrid
         rows={rows}
