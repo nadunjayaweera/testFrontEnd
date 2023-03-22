@@ -14,17 +14,15 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { mainListItems } from '../Dashboard/listitems';
 import { AppBar, Drawer, mdTheme, Copyright } from '../Structure';
-import ProductList from './productlist';
-import { Button, TextField } from '@mui/material';
-import { useHistory } from 'react-router-dom';
+import FormAddProduct from './Formadditem';
 
-export default function Products() {
+
+
+export default function AddProducts() {
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
   };
-
-const history = useHistory();
 
   return (
     <ThemeProvider theme={mdTheme}>
@@ -55,7 +53,7 @@ const history = useHistory();
               noWrap
               sx={{ flexGrow: 1 }}
             >
-              Products
+              Update Product
             </Typography>
           </Toolbar>
         </AppBar>
@@ -90,29 +88,17 @@ const history = useHistory();
             overflow: 'auto',
           }}
         >
-          <Toolbar sx={{ mb: 2 }}>
-            <Button variant="contained">Add Item</Button>
-          </Toolbar>
+          <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', pb:2 }}>
-              <Button variant="contained" onClick={() => history.push('/products/additem')}>
-                Add Item
-              </Button>
-            </Box>
             <Grid container spacing={3}>
               <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                  <ProductList />
+                  <FormAddProduct/>
                 </Paper>
               </Grid>
             </Grid>
             <Box sx={{ pt: 4 }}>
-              <Typography variant="body2" color="text.secondary" align="center">
-                {'© '}
-                Your Website
-                {' '}
-                {new Date().getFullYear()}
-              </Typography>
+              <Copyright />
             </Box>
           </Container>
         </Box>
@@ -120,4 +106,3 @@ const history = useHistory();
     </ThemeProvider>
   );
 }
-

@@ -11,6 +11,7 @@ import Sales from './Source/Admin/Sales/Sales';
 import ItemList from './Source/User/item';
 import Products from './Source/Admin/Products/Products';
 import EditItem from './Source/Admin/Editproduct/Editproduct';
+import AddProducts from './Source/Admin/Additem/Addproduct';
 
 function App() {
 
@@ -26,6 +27,7 @@ function App() {
         <Route exact path="/customers" component={Customers} />
         <Route exact path="/products" component={Products} />
         <Route exact path="/products/edit/:id?" component={EditItem} />
+        <Route exact path="/products/additem" component={AddProducts} />
       </Switch>
     </Router>
   );
