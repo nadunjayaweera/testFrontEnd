@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
     width: '100%', // Set width to 100%
     height: '100%', // Set height to 100%
     objectFit: 'contain', // Maintain aspect ratio of image
-  },
+      },
   
 },
   formControl: {
@@ -124,7 +124,7 @@ export default function FormAddProduct() {
           )}
           {!image && (<div>
                 <img
-              src={"https://www.britishcornershop.co.uk/img/large/CY0273.jpg?auto=format&fit=crop&w=286"} alt = "product image" style={{maxWidth:200, maxHeight:200}}
+              src={"https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Antu_insert-image.svg/2048px-Antu_insert-image.svg.png"} alt = "product image" style={{maxWidth:200, maxHeight:200}}
             />
           </div>)}
           </div>
