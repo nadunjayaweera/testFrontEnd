@@ -15,7 +15,8 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { mainListItems } from '../Dashboard/listitems';
 import { AppBar, Drawer, mdTheme, Copyright } from '../Structure';
-import TodaySales from '../Cards/Todaysale';
+// import {TodaySales, ThisMonth} from './Cards/SalesCards';
+import { TodaySales, ThisMonth } from './Cards/SalesCards';
 
 export default function Reports() {
   const [open, setOpen] = React.useState(true);
@@ -90,7 +91,8 @@ export default function Reports() {
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
              <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', pb:2 }}>
-              <TodaySales/>
+              <TodaySales />
+              <ThisMonth/>
             </Box>
             <Grid container spacing={3}>
               {Chart}
