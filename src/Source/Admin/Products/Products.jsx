@@ -18,6 +18,7 @@ import ProductList from './productlist';
 import { Button, TextField } from '@mui/material';
 import { useHistory } from 'react-router-dom';
 
+
 export default function Products() {
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
@@ -107,12 +108,7 @@ const history = useHistory();
               </Grid>
             </Grid>
             <Box sx={{ pt: 4 }}>
-              <Typography variant="body2" color="text.secondary" align="center">
-                {'© '}
-                Your Website
-                {' '}
-                {new Date().getFullYear()}
-              </Typography>
+              <Copyright/>
             </Box>
           </Container>
         </Box>

@@ -1,85 +1,120 @@
+
 import * as React from 'react';
-import Link from '@mui/material/Link';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Title from '../Dashboard/title';
+import { alpha, styled } from '@mui/material/styles';
+import { DataGrid, gridClasses } from '@mui/x-data-grid';
 
-// Generate Order Data
-function createData(id, date, name, item, amount) {
-  return { id, date, name, item, amount };
-}
+const ODD_OPACITY = 0.2;
 
-const rows = [
-  createData(
-    0,
-    '1 Mar, 2023',
-    'Nadun Jayaweera',
-    'Chocolate Cookies',
-    580.00,
-  ),
-  createData(
-    1,
-    '1 Mar, 2023',
-    'Sadaru DeSilva',
-    'Dairy Milk',
-    100.00,
-  ),
-  createData(
-      2,
-      '1 Mar, 2023',
-      'Pramila Krishan',
-      'Toffee Crisp',
-      165.00),
-  createData(
-    3,
-    '2 Mar, 2023',
-    'Malaka Yayakodi',
-    'Hershy nuggets',
-    450.00,
-  ),
-  createData(
-    4,
-    '2 Mar, 2023',
-    'Kaweesha Thilakarathna',
-    'Juzt Jelly',
-    70.00,
-  ),
+const StripedDataGrid = styled(DataGrid)(({ theme }) => ({
+  [`& .${gridClasses.row}.even`]: {
+    backgroundColor: theme.palette.grey[200],
+    '&:hover, &.Mui-hovered': {
+      backgroundColor: alpha(theme.palette.primary.main, ODD_OPACITY),
+      '@media (hover: none)': {
+        backgroundColor: 'transparent',
+      },
+    },
+    '&.Mui-selected': {
+      backgroundColor: alpha(
+        theme.palette.primary.main,
+        ODD_OPACITY + theme.palette.action.selectedOpacity,
+      ),
+      '&:hover, &.Mui-hovered': {
+        backgroundColor: alpha(
+          theme.palette.primary.main,
+          ODD_OPACITY +
+            theme.palette.action.selectedOpacity +
+            theme.palette.action.hoverOpacity,
+        ),
+        // Reset on touch devices, it doesn't add specificity
+        '@media (hover: none)': {
+          backgroundColor: alpha(
+            theme.palette.primary.main,
+            ODD_OPACITY + theme.palette.action.selectedOpacity,
+          ),
+        },
+      },
+    },
+  },
+}));
+
+const dummyProducts = [
+  {
+    date: '1 Mar, 2023',
+    id: 1,
+    name: 'Nadun Jayaweera',
+    item: 'Chocolate Cookies',
+    amount: 580.00.toLocaleString('en-US', {minimumFractionDigits: 2}),
+  },
+  {
+    date: '1 Mar, 2023',
+    id: 2,
+    name: 'Sadaru DeSilva',
+    item: 'Dairy Milk',
+    amount: 100.00.toLocaleString('en-US', {minimumFractionDigits: 2}),
+  },
+  {
+    date: '1 Mar, 2023',
+    id: 3,
+    name: 'Pramila Krishan',
+    item: 'Toffee Crisp',
+    amount: 165.00.toLocaleString('en-US', {minimumFractionDigits: 2}),
+  },
+  {
+    date: '2 Mar, 2023',
+    id: 4,
+    name: 'Malaka Jayakodi',
+    item: 'Hershy Nuggets',
+    amount: 165.00.toLocaleString('en-US', {minimumFractionDigits: 2}),
+  },{
+    date: '2 Mar, 2023',
+    id: 5,
+    name: 'Kaweesha Thilakarathna',
+    item: 'Juzt Jelly',
+    amount: 165.00.toLocaleString('en-US', {minimumFractionDigits: 2}),
+  },
 ];
 
-function preventDefault(event) {
-  event.preventDefault();
-}
-
 export default function Orders() {
+  const [editRowsModel, setEditRowsModel] = React.useState({});
+
+  const columns = [
+    { field: 'date', headerName: 'Date', width: 150 },
+    { field: 'id', headerName: 'ID', width: 70 },
+    {
+      field: 'name',
+      headerName: (
+        <div style={{ textAlign: 'left' }}>
+          Name
+        </div>
+      ),
+      width: 220,
+      type: 'text'
+    },
+   {
+      field: 'item',
+      headerName: (
+        <div style={{ textAlign: 'left' }}>
+          Item
+        </div>
+      ),
+      width: 200,
+      type: 'text'
+    },
+    { field: 'amount', headerName: 'Amount (Rs. )', type: 'number', width: 150 },
+    
+];
+  
+
   return (
-    <React.Fragment>
-      <Title>Recent Sales</Title>
-      <Table size="small">
-        <TableHead>
-          <TableRow>
-            <TableCell>Date</TableCell>
-            <TableCell>Name</TableCell>
-            <TableCell>Item</TableCell>
-            <TableCell align="right">Amount</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.id}>
-              <TableCell>{row.date}</TableCell>
-              <TableCell>{row.name}</TableCell>
-              <TableCell>{row.item}</TableCell>
-              <TableCell align="right">{`Rs.${row.amount}`}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-      <Link color="primary" href="#" onClick={preventDefault} sx={{ mt: 3 }}>
-        See more orders
-      </Link>
-    </React.Fragment>
+    
+    <div style={{ height: 400, width: '100%' }}>
+      <StripedDataGrid
+        rows={dummyProducts}
+        columns={columns}
+        editRowsModel={editRowsModel}
+        onEditRowsModelChange={(newModel) => setEditRowsModel(newModel)}
+      />
+    </div>
   );
 }

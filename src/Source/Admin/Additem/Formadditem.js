@@ -119,12 +119,12 @@ export default function FormAddProduct() {
             <div className={classes.imageContainer}>
               {image && (
             <div>
-            <img src={URL.createObjectURL(image)} alt="product image" style={{maxWidth:200, maxHeight:200}} />
+            <img src={URL.createObjectURL(image)} alt="product image" style={{maxWidth:200, maxHeight:200}} loading="lazy" />
           </div>
           )}
           {!image && (<div>
                 <img
-              src={"https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Antu_insert-image.svg/2048px-Antu_insert-image.svg.png"} alt = "product image" style={{maxWidth:200, maxHeight:200}}
+              src={"https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Antu_insert-image.svg/2048px-Antu_insert-image.svg.png"} alt = "product image" style={{maxWidth:200, maxHeight:200}} loading="lazy"
             />
           </div>)}
           </div>
