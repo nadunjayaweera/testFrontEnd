@@ -15,8 +15,8 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { mainListItems } from '../Dashboard/listitems';
 import { AppBar, Drawer, mdTheme, Copyright } from '../Structure';
-// import {TodaySales, ThisMonth} from './Cards/SalesCards';
-import { TodaySales, ThisMonth } from './Cards/SalesCards';
+import { TodaySales, ThisMonth } from '../Cards/SalesCards';
+
 
 export default function Reports() {
   const [open, setOpen] = React.useState(true);
