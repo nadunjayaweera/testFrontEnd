@@ -16,7 +16,9 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { mainListItems } from './listitems';
 import Orders from '../Sales/Orders';
 import { AppBar, Drawer, mdTheme, Copyright } from '../Structure';
-
+import Title from '../Dashboard/title';
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import Badge from '@mui/material/Badge';
 
 export default function DashboardContent() {
   const [open, setOpen] = React.useState(true);
@@ -55,6 +57,11 @@ export default function DashboardContent() {
             >
               Dashboard
             </Typography>
+            <IconButton color="inherit">
+              <Badge badgeContent={2} color="secondary">
+                <NotificationsIcon />
+              </Badge>
+            </IconButton>
           </Toolbar>
         </AppBar>
         <Drawer variant="permanent" open={open}>
@@ -106,7 +113,10 @@ export default function DashboardContent() {
               </Grid>
               <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                  <Orders />
+                  <div>
+                    <Title>Recent Sales</Title>
+                  </div>
+                  <Orders/>
                 </Paper>
               </Grid>
             </Grid>
