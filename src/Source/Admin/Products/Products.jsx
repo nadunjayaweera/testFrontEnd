@@ -17,7 +17,7 @@ import { AppBar, Drawer, mdTheme, Copyright } from '../Structure';
 import ProductList from './productlist';
 import { Button } from '@mui/material';
 import { useHistory } from 'react-router-dom';
-
+import Notificationicon from '../Notification/Notifications';
 
 export default function Products() {
   const [open, setOpen] = React.useState(true);
@@ -58,6 +58,7 @@ const history = useHistory();
             >
               Products
             </Typography>
+            <Notificationicon/>
           </Toolbar>
         </AppBar>
         <Drawer variant="permanent" open={open}>

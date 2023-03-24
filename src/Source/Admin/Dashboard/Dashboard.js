@@ -17,8 +17,7 @@ import { mainListItems } from './listitems';
 import Orders from '../Sales/Orders';
 import { AppBar, Drawer, mdTheme, Copyright } from '../Structure';
 import Title from '../Dashboard/title';
-import NotificationsIcon from '@mui/icons-material/Notifications';
-import Badge from '@mui/material/Badge';
+import Notificationicon from '../Notification/Notifications';
 
 export default function DashboardContent() {
   const [open, setOpen] = React.useState(true);
@@ -57,11 +56,7 @@ export default function DashboardContent() {
             >
               Dashboard
             </Typography>
-            <IconButton color="inherit">
-              <Badge badgeContent={2} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
+            <Notificationicon/>
           </Toolbar>
         </AppBar>
         <Drawer variant="permanent" open={open}>

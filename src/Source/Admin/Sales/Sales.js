@@ -15,7 +15,7 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { mainListItems } from '../Dashboard/listitems';
 import Orders from './Orders';
 import { AppBar, Drawer, mdTheme, Copyright } from '../Structure';
-
+import Notificationicon from '../Notification/Notifications';
 
 export default function Sales() {
   const [open, setOpen] = React.useState(true);
@@ -54,6 +54,7 @@ export default function Sales() {
             >
               Sales
             </Typography>
+            <Notificationicon/>
           </Toolbar>
         </AppBar>
         <Drawer variant="permanent" open={open}>

@@ -16,7 +16,7 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { mainListItems } from '../Dashboard/listitems';
 import { AppBar, Drawer, mdTheme, Copyright } from '../Structure';
 import { TodaySales, ThisMonth, LastMonth } from '../Cards/SalesCards';
-
+import Notificationicon from '../Notification/Notifications';
 
 
 export default function Reports() {
@@ -56,6 +56,7 @@ export default function Reports() {
             >
               Reports
             </Typography>
+            <Notificationicon/>
           </Toolbar>
         </AppBar>
         <Drawer variant="permanent" open={open}>
