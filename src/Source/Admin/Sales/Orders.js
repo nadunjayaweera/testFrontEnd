@@ -66,7 +66,8 @@ const dummyProducts = [
     name: 'Malaka Jayakodi',
     item: 'Hershy Nuggets',
     amount: 165.00.toLocaleString('en-US', {minimumFractionDigits: 2}),
-  },{
+  },
+  {
     date: '2 Mar, 2023',
     id: 5,
     name: 'Kaweesha Thilakarathna',
