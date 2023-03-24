@@ -15,7 +15,8 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { mainListItems } from '../Dashboard/listitems';
 import { AppBar, Drawer, mdTheme, Copyright } from '../Structure';
-import { TodaySales, ThisMonth } from '../Cards/SalesCards';
+import { TodaySales, ThisMonth, LastMonth } from '../Cards/SalesCards';
+import TableHover from '../Stockalert/Stockalert';
 
 
 export default function Reports() {
@@ -92,7 +93,8 @@ export default function Reports() {
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
              <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', pb:2 }}>
               <TodaySales />
-              <ThisMonth/>
+              <ThisMonth />
+              <LastMonth/>
             </Box>
             <Grid container spacing={3}>
               {Chart}
@@ -106,6 +108,7 @@ export default function Reports() {
                   }}
                 >
                   <Chart />
+                  <TableHover/>
                   </Paper>
               </Grid>
             </Grid>

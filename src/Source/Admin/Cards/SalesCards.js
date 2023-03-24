@@ -6,7 +6,7 @@ const TodaySales = () => {
   return (
     <Card sx={{ minWidth: 275 }}>
       <CardContent>
-        <Typography variant="h5" component="div">
+        <Typography variant="h6" component="div">
           Today Sales
         </Typography>
         <Typography variant="h4" component="div">
@@ -22,7 +22,7 @@ const ThisMonth = () => {
   return (
     <Card sx={{ minWidth: 275 }}>
       <CardContent>
-        <Typography variant="h5" component="div">
+        <Typography variant="h6" component="div">
           This Month Sales
         </Typography>
         <Typography variant="h4" component="div">
@@ -33,5 +33,21 @@ const ThisMonth = () => {
   );
 };
 
+const LastMonth = () => {
+  const LastMonthSale = 12700; // Replace with the actual total sales amount for the month
+  return (
+    <Card sx={{ minWidth: 275 }}>
+      <CardContent>
+        <Typography variant="h6" component="div">
+          Last Month Sales
+        </Typography>
+        <Typography variant="h4" component="div">
+          Rs.{LastMonthSale}
+        </Typography>
+      </CardContent>
+    </Card>
+  );
+};
 
-export { TodaySales, ThisMonth };
+
+export { TodaySales, ThisMonth, LastMonth };
