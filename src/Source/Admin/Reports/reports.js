@@ -16,7 +16,7 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { mainListItems } from '../Dashboard/listitems';
 import { AppBar, Drawer, mdTheme, Copyright } from '../Structure';
 import { TodaySales, ThisMonth, LastMonth } from '../Cards/SalesCards';
-import TableHover from '../Stockalert/Stockalert';
+
 
 
 export default function Reports() {
@@ -108,7 +108,6 @@ export default function Reports() {
                   }}
                 >
                   <Chart />
-                  <TableHover/>
                   </Paper>
               </Grid>
             </Grid>
