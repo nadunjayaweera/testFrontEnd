@@ -18,6 +18,8 @@ import Orders from '../Sales/Orders';
 import { AppBar, Drawer, mdTheme, Copyright } from '../Structure';
 import Title from '../Dashboard/title';
 import Notificationicon from '../Notification/Notifications';
+import { TodaySales, ThisMonth, LastMonth } from '../Cards/SalesCards';
+import { Card } from '@mui/material';
 
 export default function DashboardContent() {
   const [open, setOpen] = React.useState(true);
@@ -93,6 +95,12 @@ export default function DashboardContent() {
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Grid container spacing={3}>
+              <Grid item xs={12}>
+                <Card sx={{ maxWidth: 275 }}>
+                  <TodaySales />
+                </Card>
+              </Grid>
+
               {Chart}
               <Grid item xs={12}>
                 <Paper
@@ -102,10 +110,11 @@ export default function DashboardContent() {
                     flexDirection: 'column',
                     height:240,
                   }}
-                >
+                 >
                   <Chart />
                   </Paper>
               </Grid>
+              
               <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
                   <div>
