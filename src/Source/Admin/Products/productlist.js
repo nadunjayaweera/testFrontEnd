@@ -67,6 +67,22 @@ const dummyProducts = [
     weight: 30,
     image:"https://www.britishcornershop.co.uk/img/large/CY0273.jpg?auto=format&fit=crop&w=286",
   },
+  {
+    id: 4,
+    name: 'Hersheys nuggets',
+    quantity: '12',
+    price: 450.00.toLocaleString('en-US', {minimumFractionDigits: 2}),
+    weight: 200,
+    image:"https://products.blains.com/600/132/1323394.jpg?auto=format&fit=crop&w=286",
+  },
+  {
+    id: 5,
+    name: 'Juzt Jelly',
+    quantity: '28',
+    price: 70.00.toLocaleString('en-US', {minimumFractionDigits: 2}),
+    weight: 50,
+    image:"https://www.justgotochef.com/img/1545459094-Alpenliebe-Juzt%20Jelly-Front.jpg?auto=format&fit=crop&w=286",
+  },
 ];
 
 export default function ProductList() {

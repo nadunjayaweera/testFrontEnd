@@ -59,6 +59,27 @@ const dummyUsers = [
     lastname: 'Krishan',
     email: 'pramilakrishan@gmail.com',
   },
+  {
+    id: 4,
+    createdate: '4 March, 2023',
+    firstname: 'Malaka',
+    lastname: 'Aruna',
+    email: 'malakaarun@gmail.com',
+  },
+  {
+    id: 5,
+    createdate: '6 March, 2023',
+    firstname: 'Kaweesha',
+    lastname: 'Thilakarathna',
+    email: 'kaweeshathilaka@gmail.com',
+  },
+  {
+    id: 6,
+    createdate: '6 March, 2023',
+    firstname: 'Chamika',
+    lastname: 'Nipun',
+    email: 'chamikanipun@gmail.com',
+  },
 ];
 
 export default function Users() {
