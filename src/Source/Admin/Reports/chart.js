@@ -8,6 +8,10 @@ function createData(time, amount) {
   return { time, amount };
 }
 
+function createMonthData(date, amount) {
+  return { date, amount };
+}
+
 const data = [
   createData('00:00', 0),
   createData('03:00', 140),
@@ -20,7 +24,17 @@ const data = [
   createData('24:00', 4000),
 ];
 
-export default function Chart() {
+const mdata = [
+  createMonthData('Mon', 3050),
+  createMonthData('Tue', 2340),
+  createMonthData('Wed', 5023),
+  createMonthData('Thu', 2556),
+  createMonthData('Fri', 9432),
+  createMonthData('Sat', 8342),
+  createMonthData('Sun', 6328),
+]
+
+const Chart =() => {
   const theme = useTheme();
 
   return (
@@ -69,3 +83,55 @@ export default function Chart() {
     </React.Fragment>
   );
 }
+
+const MonthChart =() => {
+  const theme = useTheme();
+
+  return (
+    <React.Fragment>
+      <Title>This Month</Title>
+      <ResponsiveContainer>
+        <LineChart
+          data={mdata}
+          margin={{
+            top: 16,
+            right: 16,
+            bottom: 0,
+            left: 24,
+          }}
+        >
+          <XAxis
+            dataKey="date"
+            stroke={theme.palette.text.secondary}
+            style={theme.typography.body2}
+          />
+          <YAxis
+            stroke={theme.palette.text.secondary}
+            style={theme.typography.body2}
+          >
+            <Label
+              angle={270}
+              position="left"
+              style={{
+                textAnchor: 'middle',
+                fill: theme.palette.text.primary,
+                ...theme.typography.body1,
+              }}
+            >
+              Sales (Rs.)
+            </Label>
+          </YAxis>
+          <Line
+            isAnimationActive={false}
+            type="monotone"
+            dataKey="amount"
+            stroke={theme.palette.primary.main}
+            dot={false}
+          />
+        </LineChart>
+      </ResponsiveContainer>
+    </React.Fragment>
+  );
+}
+
+export {Chart, MonthChart}

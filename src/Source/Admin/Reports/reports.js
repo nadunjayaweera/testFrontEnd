@@ -1,4 +1,4 @@
-import Chart from './chart';
+import { Chart, MonthChart } from './chart';
 import * as React from 'react';
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -112,6 +112,25 @@ export default function Reports() {
                   </Paper>
               </Grid>
             </Grid>
+            
+            <Box sx={{pb:4}}/>
+
+            <Grid container spacing={3}>
+              {Chart}
+              <Grid item xs={12}>
+                <Paper
+                  sx={{
+                    p: 2,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    height:240,
+                  }}
+                >
+                  <MonthChart />
+                  </Paper>
+              </Grid>
+            </Grid>
+
             <Box sx={{ pt: 4 }}>
               <Copyright />
             </Box>
