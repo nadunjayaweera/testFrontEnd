@@ -5,6 +5,8 @@ import { Button, TextField, Grid, Typography } from '@mui/material';
 import { useLocation } from 'react-router-dom';
 import { useState } from 'react';
 import Box from '@mui/material/Box';
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -45,18 +47,32 @@ export default function FormAddProduct() {
 //   const { product } = location.state;
 
   const [image, setImage] = useState(null);
-
+  const [hasErrors, setHasErrors] = useState(false);
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
     setImage(file);
   };
   const handleSubmit = (event) => {
     event.preventDefault();
+    const formData = new FormData(event.target);
+    const hasEmptyFields = Array.from(formData.values()).some((value) => !value.trim()); 
+    if (hasEmptyFields) {
+      setHasErrors(true);
+      return;
+    }
     // TODO: Handle form submission logic
+
   };
+
 
   return (
     <form onSubmit={handleSubmit}>
+      {hasErrors && (
+        <Alert severity="error">
+          <AlertTitle>Error</AlertTitle>
+          Please fill out all fields.
+        </Alert>
+      )}
       <Grid container spacing={3} className={classes.container}>
         <Grid item xs={12}>
           <Typography variant="h4" component="h1">
