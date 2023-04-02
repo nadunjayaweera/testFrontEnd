@@ -8,7 +8,9 @@ import Input from '@mui/joy/Input';
 import Button from '@mui/joy/Button';
 import Link from '@mui/joy/Link';
 import { useHistory } from 'react-router-dom';
-import axios from 'axios';
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
+import Stack from '@mui/material/Stack';
 
 export default function SignUpPage() {
   const history = useHistory();
@@ -27,26 +29,34 @@ export default function SignUpPage() {
     }));
   };
 
-  const handleSignUp = () => {
-    // Send formData to backend API
-    fetch('http://localhost:8000/api/v1/signup', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData),
+const handleSignUp = () => {
+  // Send formData to backend API
+  fetch('http://localhost:8080/api/v1/signup', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(formData),
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error('Email already exists');
+      }
+      return response.json();
     })
-      .then((response) => response.json())
-      .then((data) => {
-        // Handle successful sign-up
-        console.log(data);
-        history.push('/item');
-      })
-      .catch((error) => {
-        // Handle sign-up error
-        console.error(error);
-      });
-  };
+    .then((data) => {
+      // Handle successful sign-up
+      console.log(data);
+      history.push('/item');
+    })
+    .catch((error) => {
+      // Handle sign-up error
+      console.error(error);
+      // Show error message to user
+      alert(error.message);
+    });
+};
+
 
   return (
     <CssVarsProvider>
