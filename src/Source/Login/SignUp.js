@@ -29,6 +29,8 @@ export default function SignUpPage() {
     }));
   };
 
+  const [errorMessage, setErrorMessage] = React.useState(null);
+
 const handleSignUp = () => {
   // Send formData to backend API
   fetch('http://localhost:8080/api/v1/signup', {
@@ -52,8 +54,8 @@ const handleSignUp = () => {
     .catch((error) => {
       // Handle sign-up error
       console.error(error);
-      // Show error message to user
-      alert(error.message);
+      // Set error message state variable
+      setErrorMessage(error.message);
     });
 };
 
@@ -76,6 +78,14 @@ const handleSignUp = () => {
           }}
           variant="outlined"
         >
+          {errorMessage && (
+          <Stack sx={{ width: '100%' }} spacing={2}>
+            <Alert severity="error">
+              <AlertTitle>Error</AlertTitle>
+              {errorMessage}
+            </Alert>
+          </Stack>
+        )}
           <div>
             <Typography level="h4" component="h1">
               <b>Sign Up</b>
