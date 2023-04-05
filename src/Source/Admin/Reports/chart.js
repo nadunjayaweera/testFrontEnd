@@ -3,6 +3,7 @@ import { useTheme } from '@mui/material/styles';
 import { LineChart, Line, XAxis, YAxis, Label, ResponsiveContainer, Tooltip } from 'recharts';
 import Title from '../Dashboard/title';
 
+
 // Generate Sales Data
 function createData(time, amount) {
   return { time, amount };
@@ -13,15 +14,28 @@ function createMonthData(date, amount) {
 }
 
 const customTooltip = ({ active, payload }) => {
+  const tooltipStyles = {
+    backgroundColor: '#fff',
+    border: '1px solid #ccc',
+    padding: '8px',
+  };
+
+  const labelStyles = {
+    fontWeight: 'bold',
+    marginBottom: '4px',
+  };
+
   if (active && payload && payload.length) {
     return (
-      <div className="custom-tooltip">
-        <p className="label">{`${payload[0].name} : ${payload[0].value}`}</p>
+      <div style={tooltipStyles}>
+        <p style={labelStyles}>{`${payload[0].name} : ${payload[0].value}`}</p>
+        <p>{`Value: ${payload[0].value}`}</p>
       </div>
     );
   }
   return null;
 };
+
 
 
 const data = [
@@ -48,6 +62,7 @@ const mdata = [
 
 const Chart =() => {
   const theme = useTheme();
+  
 
   return (
     <React.Fragment>
@@ -72,7 +87,12 @@ const Chart =() => {
             stroke={theme.palette.text.secondary}
             style={theme.typography.body2}
           >
-            <Tooltip content={customTooltip} />
+            <Tooltip
+              content={customTooltip}
+              cursor={true}
+              animationDuration={0}
+              position={{ x: -10, y: -30 }}
+            />
 
             <Label
               angle={270}
