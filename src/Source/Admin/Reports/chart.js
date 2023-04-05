@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useTheme } from '@mui/material/styles';
-import { LineChart, Line, XAxis, YAxis, Label, ResponsiveContainer } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, Label, ResponsiveContainer, Tooltip } from 'recharts';
 import Title from '../Dashboard/title';
 
 // Generate Sales Data
@@ -11,6 +11,18 @@ function createData(time, amount) {
 function createMonthData(date, amount) {
   return { date, amount };
 }
+
+const customTooltip = ({ active, payload }) => {
+  if (active && payload && payload.length) {
+    return (
+      <div className="custom-tooltip">
+        <p className="label">{`${payload[0].name} : ${payload[0].value}`}</p>
+      </div>
+    );
+  }
+  return null;
+};
+
 
 const data = [
   createData('00:00', 0),
@@ -50,6 +62,7 @@ const Chart =() => {
             left: 24,
           }}
         >
+          
           <XAxis
             dataKey="time"
             stroke={theme.palette.text.secondary}
@@ -59,6 +72,8 @@ const Chart =() => {
             stroke={theme.palette.text.secondary}
             style={theme.typography.body2}
           >
+            <Tooltip content={customTooltip} />
+
             <Label
               angle={270}
               position="left"

@@ -8,13 +8,45 @@ import Input from '@mui/joy/Input';
 import Button from '@mui/joy/Button';
 import Link from '@mui/joy/Link';
 import { useHistory } from 'react-router-dom';
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
+import Stack from '@mui/material/Stack';
 
-
+export function DescriptionAlerts({ severity, message }) {
+  return (
+    <Stack sx={{ width: '100%' }} spacing={2}>
+      <Alert severity={severity}>
+        <AlertTitle>{severity}</AlertTitle>
+        {message}
+      </Alert>
+    </Stack>
+  );
+}
 
 export default function LoginPage() {
   const history = useHistory();
-  const handleLogin = () => {
-    history.push('/item');
+  const [errorMessage, setErrorMessage] = React.useState(null);
+
+  const handleLogin = async () => {
+    const email = document.querySelector('input[name="email"]').value;
+    const password = document.querySelector('input[name="password"]').value;
+
+    const response = await fetch('http://localhost:8080/api/v1/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email, password }),
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      history.push('/item');
+    } else {
+      const error = await response.text();
+      console.error(error);
+      setErrorMessage(error);
+    }
   };
   return (
     <CssVarsProvider>
@@ -69,6 +101,9 @@ export default function LoginPage() {
           >
             Don&apos;t have an account?
           </Typography>
+           {errorMessage && (
+          <DescriptionAlerts severity="error" message={errorMessage} />
+        )}
         </Sheet>
       </main>
     </CssVarsProvider>
