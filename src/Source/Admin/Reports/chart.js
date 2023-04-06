@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useTheme } from '@mui/material/styles';
 import { LineChart, Line, XAxis, YAxis, Label, ResponsiveContainer, Tooltip } from 'recharts';
 import Title from '../Dashboard/title';
+import { EventTracker } from "@devexpress/dx-react-chart";
 
 
 // Generate Sales Data
@@ -12,29 +13,6 @@ function createData(time, amount) {
 function createMonthData(date, amount) {
   return { date, amount };
 }
-
-const customTooltip = ({ active, payload }) => {
-  const tooltipStyles = {
-    backgroundColor: '#fff',
-    border: '1px solid #ccc',
-    padding: '8px',
-  };
-
-  const labelStyles = {
-    fontWeight: 'bold',
-    marginBottom: '4px',
-  };
-
-  if (active && payload && payload.length) {
-    return (
-      <div style={tooltipStyles}>
-        <p style={labelStyles}>{`${payload[0].name} : ${payload[0].value}`}</p>
-        <p>{`Value: ${payload[0].value}`}</p>
-      </div>
-    );
-  }
-  return null;
-};
 
 
 
@@ -67,7 +45,7 @@ const Chart =() => {
   return (
     <React.Fragment>
       <Title>Today</Title>
-      <ResponsiveContainer>
+      <ResponsiveContainer width="100%" height={175}>
         <LineChart
           data={data}
           margin={{
@@ -87,13 +65,7 @@ const Chart =() => {
             stroke={theme.palette.text.secondary}
             style={theme.typography.body2}
           >
-            <Tooltip
-              content={customTooltip}
-              cursor={true}
-              animationDuration={0}
-              position={{ x: -10, y: -30 }}
-            />
-
+           
             <Label
               angle={270}
               position="left"
@@ -106,6 +78,9 @@ const Chart =() => {
               Sales (Rs.)
             </Label>
           </YAxis>
+          <EventTracker/>
+          <Tooltip />
+          
           <Line
             isAnimationActive={false}
             type="monotone"
@@ -156,6 +131,10 @@ const MonthChart =() => {
               Sales (Rs.)
             </Label>
           </YAxis>
+
+          <EventTracker/>
+          <Tooltip />
+
           <Line
             isAnimationActive={false}
             type="monotone"
