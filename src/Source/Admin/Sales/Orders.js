@@ -2,6 +2,8 @@
 import * as React from 'react';
 import { alpha, styled } from '@mui/material/styles';
 import { DataGrid, gridClasses } from '@mui/x-data-grid';
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
 
 const ODD_OPACITY = 0.2;
 
@@ -76,6 +78,7 @@ const dummyProducts = [
   },
 ];
 
+
 export default function Orders() {
   const [editRowsModel, setEditRowsModel] = React.useState({});
 
@@ -106,15 +109,52 @@ export default function Orders() {
     
 ];
   
+const handleDownloadPdf = () => {
+  // Get the filtered rows from the grid
+  const filteredRows = gridRef.current?.getRows?.() || [];
+
+  // Create a new jsPDF instance
+  const doc = new jsPDF();
+
+  // Add a title to the PDF
+  doc.text('Sales Data', 10, 10);
+
+  // Define the columns for the PDF table
+  const columns = ['Date', 'ID', 'Name', 'Item', 'Amount (Rs.)'];
+
+  // Map the filtered rows to an array of arrays
+  const data = filteredRows.map((row) => [
+    row.date,
+    row.id,
+    row.name,
+    row.item,
+    row.amount,
+  ]);
+
+  // Add the table to the PDF document
+  doc.autoTable({
+    head: [columns],
+    body: data,
+  });
+
+  // Save the PDF document
+  doc.save('sales.pdf');
+};
+
+  const gridRef = React.useRef(null);
+
+  
 
   return (
     
     <div style={{ height: 400, width: '100%' }}>
+      <button onClick={handleDownloadPdf}>Download PDF</button>
       <StripedDataGrid
         rows={dummyProducts}
         columns={columns}
         editRowsModel={editRowsModel}
         onEditRowsModelChange={(newModel) => setEditRowsModel(newModel)}
+        ref={gridRef}
       />
     </div>
   );
