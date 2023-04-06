@@ -99,7 +99,7 @@ const MonthChart =() => {
 
   return (
     <React.Fragment>
-      <Title>This Month</Title>
+      <Title>This Week</Title>
       <ResponsiveContainer>
         <LineChart
           data={mdata}

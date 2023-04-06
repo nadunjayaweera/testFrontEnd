@@ -1,13 +1,15 @@
 import React from 'react';
 import { Card, CardContent, Typography } from '@mui/material';
 
+
 const TodaySales = () => {
-  const TodaySale = 3760; // Replace with the actual total sales amount for the month
+  const TodaySale = 3760; 
+  const today = new Date().toLocaleDateString(); // Get the current date as a string
   return (
     <Card sx={{ minWidth: 275 }}>
       <CardContent>
         <Typography variant="h6" component="div">
-          Today Sales
+          Today Sales ({today})
         </Typography>
         <Typography variant="h4" component="div">
           Rs.{TodaySale}
@@ -18,12 +20,16 @@ const TodaySales = () => {
 };
 
 const ThisMonth = () => {
-  const ThisMonthSale = 15000; // Replace with the actual total sales amount for the month
+  const ThisMonthSale = 15000;
+  const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  const thisMonth = new Date().getMonth();
+  const thisMonthName = monthNames[thisMonth];
+
   return (
     <Card sx={{ minWidth: 275 }}>
       <CardContent>
         <Typography variant="h6" component="div">
-          This Month Sales
+          {thisMonthName} Sales
         </Typography>
         <Typography variant="h4" component="div">
           Rs.{ThisMonthSale}
@@ -34,12 +40,15 @@ const ThisMonth = () => {
 };
 
 const LastMonth = () => {
-  const LastMonthSale = 12700; // Replace with the actual total sales amount for the month
+  const LastMonthSale = 12700; 
+  const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  const thisMonth = new Date().getMonth();
+  const lastMonth = monthNames[thisMonth - 1];
   return (
     <Card sx={{ minWidth: 275 }}>
       <CardContent>
         <Typography variant="h6" component="div">
-          Last Month Sales
+          Last Month Sales ({lastMonth})
         </Typography>
         <Typography variant="h4" component="div">
           Rs.{LastMonthSale}
