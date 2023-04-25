@@ -46,7 +46,7 @@ export default function FormAddProduct() {
   const location = useLocation();
   const [image, setImage] = useState(null);
   const [hasErrors, setHasErrors] = useState(false);
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = React.useState({
     name: '',
     quantity: '',
     price: '',
@@ -54,9 +54,10 @@ export default function FormAddProduct() {
   });
 
   const handleFormChange = (event) => {
+    const { name, value } = event.target;
     setFormData((prevFormData) => ({
       ...prevFormData,
-      [event.target.name]: event.target.value,
+      [name]: value,
     }));
   };
 
@@ -75,20 +76,26 @@ export default function FormAddProduct() {
       return;
     }
 
-    const data = new FormData();
-    data.append('name', formData.name);
-    data.append('quantity', formData.quantity);
-    data.append('price', formData.price);
-    data.append('weight', formData.weight);
-    data.append('image', image);
-    console.log("the data is:");
-    console.log(data);
-    const requestOptions = {
-      method: 'POST',
-      body: data,
-    };
+    // const data = new FormData();
+    // data.append('name', formData.name);
+    // data.append('quantity', formData.quantity);
+    // data.append('price', formData.price);
+    // data.append('weight', formData.weight);
+    // data.append('image', image);
+    // console.log("the data is:");
+    // console.log(data);
+    // const requestOptions = {
+    //   method: 'POST',
+    //   body: data,
+    // };
 
-    fetch('http://localhost:8080/api/v1/additem', requestOptions)
+    fetch('http://localhost:8080/api/v1/additem', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    })
       .then((response) => response.json())
       .then((data) => console.log(data))
       .catch((error) => console.error(error));
@@ -170,6 +177,7 @@ export default function FormAddProduct() {
             type="file"
             accept="image/*"
             onChange={handleImageUpload}
+            value={formData.image}
           />
           </div>
           </Box>
