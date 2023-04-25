@@ -8,20 +8,6 @@ import Input from '@mui/joy/Input';
 import Button from '@mui/joy/Button';
 import Link from '@mui/joy/Link';
 import { useHistory } from 'react-router-dom';
-import Alert from '@mui/material/Alert';
-import AlertTitle from '@mui/material/AlertTitle';
-import Stack from '@mui/material/Stack';
-
-export function DescriptionAlerts({ severity, message }) {
-  return (
-    <Stack sx={{ width: '100%' }} spacing={2}>
-      <Alert severity={severity}>
-        <AlertTitle>{severity}</AlertTitle>
-        {message}
-      </Alert>
-    </Stack>
-  );
-}
 
 export default function LoginPage() {
   const history = useHistory();
@@ -43,11 +29,12 @@ export default function LoginPage() {
       const data = await response.json();
       history.push('/item');
     } else {
-      const error = await response.text();
+      const error = await response.json();
       console.error(error);
-      setErrorMessage(error);
+      setErrorMessage(error.message);
     }
   };
+
   return (
     <CssVarsProvider>
       <main>
@@ -94,6 +81,11 @@ export default function LoginPage() {
           <Button sx={{ mt: 1 /* margin top */ }} onClick={handleLogin}>
             Log in
           </Button>
+
+          <Typography style={{ color: 'red' }}>
+            {errorMessage}
+          </Typography>
+
           <Typography
             endDecorator={<Link href="/signup">Sign up</Link>}
             fontSize="sm"
@@ -101,9 +93,6 @@ export default function LoginPage() {
           >
             Don&apos;t have an account?
           </Typography>
-           {errorMessage && (
-          <DescriptionAlerts severity="error" message={errorMessage} />
-        )}
         </Sheet>
       </main>
     </CssVarsProvider>

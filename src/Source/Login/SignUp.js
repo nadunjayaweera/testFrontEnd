@@ -8,9 +8,6 @@ import Input from '@mui/joy/Input';
 import Button from '@mui/joy/Button';
 import Link from '@mui/joy/Link';
 import { useHistory } from 'react-router-dom';
-import Alert from '@mui/material/Alert';
-import AlertTitle from '@mui/material/AlertTitle';
-import Stack from '@mui/material/Stack';
 
 export default function SignUpPage() {
   const history = useHistory();
@@ -78,14 +75,7 @@ const handleSignUp = () => {
           }}
           variant="outlined"
         >
-          {errorMessage && (
-          <Stack sx={{ width: '100%' }} spacing={2}>
-            <Alert severity="error">
-              <AlertTitle>Error</AlertTitle>
-              {errorMessage}
-            </Alert>
-          </Stack>
-        )}
+          
           <div>
             <Typography level="h4" component="h1">
               <b>Sign Up</b>
@@ -137,6 +127,9 @@ const handleSignUp = () => {
           <Button sx={{ mt: 1 }} onClick={handleSignUp}>
             Sign up
           </Button>
+          <Typography style={{ color: 'red' }}>
+            {errorMessage}
+          </Typography>
           <Typography
             endDecorator={<Link href="/">Log in</Link>}
             fontSize="sm"

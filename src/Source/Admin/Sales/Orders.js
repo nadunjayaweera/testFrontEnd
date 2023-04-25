@@ -117,7 +117,7 @@ export default function Orders() {
 
   return (
     
-    <div style={{ height: 400, width: '100%' }}>
+    <div style={{ height: 500, width: '100%' }}>
       <StripedDataGrid
         rows={dummyProducts}
         columns={columns}

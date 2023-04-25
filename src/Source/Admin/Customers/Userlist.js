@@ -37,59 +37,16 @@ const StripedDataGrid = styled(DataGrid)(({ theme }) => ({
   },
 }));
 
-const dummyUsers = [
-  {
-    id: 1,
-    createdate: '3 March, 2023',
-    firstname: 'Nadun',
-    lastname: 'Jayaweera',
-    email: 'nadunmj@gmail.com',
-  },
-  {
-    id: 2,
-    createdate: '3 March, 2023',
-    firstname: 'Sadaru',
-    lastname: 'DeSilva',
-    email: 'sadarudesilva@gmail.com',
-  },
-  {
-    id: 3,
-    createdate: '4 March, 2023',
-    firstname: 'Pramila',
-    lastname: 'Krishan',
-    email: 'pramilakrishan@gmail.com',
-  },
-  {
-    id: 4,
-    createdate: '4 March, 2023',
-    firstname: 'Malaka',
-    lastname: 'Aruna',
-    email: 'malakaarun@gmail.com',
-  },
-  {
-    id: 5,
-    createdate: '6 March, 2023',
-    firstname: 'Kaweesha',
-    lastname: 'Thilakarathna',
-    email: 'kaweeshathilaka@gmail.com',
-  },
-  {
-    id: 6,
-    createdate: '6 March, 2023',
-    firstname: 'Chamika',
-    lastname: 'Nipun',
-    email: 'chamikanipun@gmail.com',
-  },
-];
 
 export default function Users() {
   const [editRowsModel, setEditRowsModel] = React.useState({});
+  const [rows, setRows] = React.useState([]);
 
   const columns = [
-    { field: 'id', headerName: 'ID', width: 70 },
-    { field: 'createdate', headerName: 'Create Date', width: 200 },
+    { field: 'userId', headerName: 'ID', width: 70 },
+    { field: 'createDate', headerName: 'Create Date', width: 200 },
     {
-      field: 'firstname',
+      field: 'fname',
       headerName: (
         <div style={{ textAlign: 'left' }}>
           Fist Name
@@ -98,7 +55,7 @@ export default function Users() {
       width: 130
     },
     {
-      field: 'lastname',
+      field: 'lname',
       headerName: (
         <div style={{ textAlign: 'left' }}>
           Last Name 
@@ -115,13 +72,25 @@ export default function Users() {
       ),
       width: 200
     },  
-];
+  ];
+  
+  React.useEffect(() => {
+  fetch('http://localhost:8080/api/v1/users')
+    .then(response => response.json())
+    .then(data => {
+      const rows = data.map(row => ({ ...row, id: row.userId }));
+      setRows(rows);
+    })
+    .catch(error => console.error(error));
+}, []);
+
+
   
   return (
     
     <div style={{ height: 400, width: '100%' }}>
       <StripedDataGrid
-        rows={dummyUsers}
+        rows={rows}
         columns={columns}
         editRowsModel={editRowsModel}
         onEditRowsModelChange={(newModel) => setEditRowsModel(newModel)}

@@ -76,7 +76,7 @@ export default function FormAddProduct() {
       <Grid container spacing={3} className={classes.container}>
         <Grid item xs={12}>
           <Typography variant="h4" component="h1">
-            Edit Product
+            Add Item
           </Typography>
         </Grid>
         <Grid item xs={12} md={6}>
