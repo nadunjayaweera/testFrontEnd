@@ -51,20 +51,24 @@ export default function FormAddProduct() {
     quantity: '',
     price: '',
     weight: '',
+    // picture: image,
   });
+
+  
+  const handleImageUpload = (event) => {
+    const file = event.target.files[0];
+    setImage(file);
+  };
 
   const handleFormChange = (event) => {
     const { name, value } = event.target;
     setFormData((prevFormData) => ({
       ...prevFormData,
       [name]: value,
+      
     }));
   };
 
-  const handleImageUpload = (event) => {
-    const file = event.target.files[0];
-    setImage(file);
-  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -76,29 +80,18 @@ export default function FormAddProduct() {
       return;
     }
 
-    // const data = new FormData();
-    // data.append('name', formData.name);
-    // data.append('quantity', formData.quantity);
-    // data.append('price', formData.price);
-    // data.append('weight', formData.weight);
-    // data.append('image', image);
-    // console.log("the data is:");
-    // console.log(data);
-    // const requestOptions = {
-    //   method: 'POST',
-    //   body: data,
-    // };
-
     fetch('http://localhost:8080/api/v1/additem', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(formData),
+      body: JSON.stringify( {formData, image} ),
     })
       .then((response) => response.json())
       .then((data) => console.log(data))
       .catch((error) => console.error(error));
+    console.log(formData);
+    console.log(image);
 };
 
 
@@ -177,7 +170,7 @@ export default function FormAddProduct() {
             type="file"
             accept="image/*"
             onChange={handleImageUpload}
-            value={formData.image}
+            
           />
           </div>
           </Box>
