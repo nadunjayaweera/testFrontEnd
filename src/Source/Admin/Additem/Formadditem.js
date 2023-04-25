@@ -54,14 +54,28 @@ export default function FormAddProduct() {
   };
   const handleSubmit = (event) => {
     event.preventDefault();
-    const formData = new FormData(event.target);
+    const formData = new FormData();
+    formData.append('name', event.target.name.value);
+    formData.append('quantity', event.target.quantity.value);
+    formData.append('price', event.target.price.value);
+    formData.append('weight', event.target.weight.value);
+    formData.append('image', image);
+
     const hasEmptyFields = Array.from(formData.values()).some((value) => !value.trim()); 
     if (hasEmptyFields) {
       setHasErrors(true);
       return;
     }
     // TODO: Handle form submission logic
+    const requestOptions = {
+    method: 'POST',
+    body: formData,
+  };
 
+  fetch('http://localhost:8080/api/v1/additem', requestOptions)
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error(error));
   };
 
 
@@ -82,7 +96,7 @@ export default function FormAddProduct() {
         <Grid item xs={12} md={6}>
           <TextField
             fullWidth
-            id="product-name"
+            id="name"
             label="Product Name"
             variant="outlined"
             // defaultValue={product.name || ""}
@@ -91,7 +105,7 @@ export default function FormAddProduct() {
         <Grid item xs={12} md={6}>
           <TextField
             fullWidth
-            id="product-quantity"
+            id="quantity"
             label="Quantity"
             variant="outlined"
             type="number"
@@ -101,7 +115,7 @@ export default function FormAddProduct() {
         <Grid item xs={12} md={6}>
           <TextField
             fullWidth
-            id="product-price"
+            id="price"
             label="Price"
             variant="outlined"
             type="number"
@@ -111,7 +125,7 @@ export default function FormAddProduct() {
         <Grid item xs={12} md={6}>
           <TextField
             fullWidth
-            id="product-weight"
+            id="weight"
             label="Weight"
             variant="outlined"
             type="number"
@@ -123,7 +137,7 @@ export default function FormAddProduct() {
             <div>
           <label htmlFor="image-upload">Product Image </label>
           <input
-            id="image-upload"
+            id="image"
             type="file"
             accept="image/*"
             onChange={handleImageUpload}
@@ -148,7 +162,7 @@ export default function FormAddProduct() {
         
         </Grid>
         <Grid item xs={12} className={classes.buttonContainer}>
-          <Button variant="contained" color="primary">
+          <Button variant="contained" color="primary" onClick={handleSubmit}>
             Save Changes
           </Button>
         </Grid>
