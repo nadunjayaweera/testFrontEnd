@@ -46,7 +46,7 @@ export default function FormAddProduct() {
   const location = useLocation();
   const [image, setImage] = useState(null);
   const [hasErrors, setHasErrors] = useState(false);
-  const [formData, setFormData] = React.useState({
+  const [formData, setFormData] = useState({
     name: '',
     quantity: '',
     price: '',
@@ -80,12 +80,16 @@ export default function FormAddProduct() {
       return;
     }
 
+    const formDataWithImage = new FormData();
+    formDataWithImage.append('name', formData.name);
+    formDataWithImage.append('quantity', formData.quantity);
+    formDataWithImage.append('price', formData.price);
+    formDataWithImage.append('weight', formData.weight);
+    formDataWithImage.append('image', image);
+
     fetch('http://localhost:8080/api/v1/additem', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify( {formData, image} ),
+      body: formDataWithImage,
     })
       .then((response) => response.json())
       .then((data) => console.log(data))
@@ -168,6 +172,8 @@ export default function FormAddProduct() {
             id="image"
             name="image"
             type="file"
+            className="form-control"
+            
             accept="image/*"
             onChange={handleImageUpload}
             
