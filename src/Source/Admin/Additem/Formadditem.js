@@ -44,39 +44,55 @@ export default function FormAddProduct() {
   const classes = useStyles();
   const history = useHistory();
   const location = useLocation();
-//   const { product } = location.state;
-
   const [image, setImage] = useState(null);
   const [hasErrors, setHasErrors] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    quantity: '',
+    price: '',
+    weight: '',
+  });
+
+  const handleFormChange = (event) => {
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [event.target.name]: event.target.value,
+    }));
+  };
+
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
     setImage(file);
   };
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    const formData = new FormData();
-    formData.append('name', event.target.name.value);
-    formData.append('quantity', event.target.quantity.value);
-    formData.append('price', event.target.price.value);
-    formData.append('weight', event.target.weight.value);
-    formData.append('image', image);
 
-    const hasEmptyFields = Array.from(formData.values()).some((value) => !value.trim()); 
+    const hasEmptyFields = Object.values(formData).some((value) => !value.trim());
+
     if (hasEmptyFields) {
       setHasErrors(true);
       return;
     }
-    // TODO: Handle form submission logic
-    const requestOptions = {
-    method: 'POST',
-    body: formData,
-  };
 
-  fetch('http://localhost:8080/api/v1/additem', requestOptions)
-    .then(response => response.json())
-    .then(data => console.log(data))
-    .catch(error => console.error(error));
-  };
+    const data = new FormData();
+    data.append('name', formData.name);
+    data.append('quantity', formData.quantity);
+    data.append('price', formData.price);
+    data.append('weight', formData.weight);
+    data.append('image', image);
+    console.log("the data is:");
+    console.log(data);
+    const requestOptions = {
+      method: 'POST',
+      body: data,
+    };
+
+    fetch('http://localhost:8080/api/v1/additem', requestOptions)
+      .then((response) => response.json())
+      .then((data) => console.log(data))
+      .catch((error) => console.error(error));
+};
 
 
   return (
@@ -97,8 +113,11 @@ export default function FormAddProduct() {
           <TextField
             fullWidth
             id="name"
+            name="name"
             label="Product Name"
             variant="outlined"
+            value={formData.name}
+            onChange = {handleFormChange}
             // defaultValue={product.name || ""}
           />
         </Grid>
@@ -106,8 +125,11 @@ export default function FormAddProduct() {
           <TextField
             fullWidth
             id="quantity"
+            name="quantity"
             label="Quantity"
             variant="outlined"
+            value={formData.quantity}
+            onChange = {handleFormChange}
             type="number"
             // defaultValue={product.quantity||""}
           />
@@ -116,8 +138,11 @@ export default function FormAddProduct() {
           <TextField
             fullWidth
             id="price"
+            name="price"
             label="Price"
             variant="outlined"
+            value={formData.price}
+            onChange={handleFormChange}
             type="number"
             // defaultValue={product.price||""}
           />
@@ -126,8 +151,11 @@ export default function FormAddProduct() {
           <TextField
             fullWidth
             id="weight"
+            name="weight"
             label="Weight"
             variant="outlined"
+            value={formData.weight}
+            onChange={handleFormChange}
             type="number"
             // defaultValue={product.weight||""}
           />
@@ -138,6 +166,7 @@ export default function FormAddProduct() {
           <label htmlFor="image-upload">Product Image </label>
           <input
             id="image"
+            name="image"
             type="file"
             accept="image/*"
             onChange={handleImageUpload}
