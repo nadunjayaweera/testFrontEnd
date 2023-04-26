@@ -46,29 +46,25 @@ export default function FormAddProduct() {
   const location = useLocation();
   const [image, setImage] = useState(null);
   const [hasErrors, setHasErrors] = useState(false);
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = React.useState({
     name: '',
     quantity: '',
     price: '',
     weight: '',
-    // picture: image,
   });
-
-  
-  const handleImageUpload = (event) => {
-    const file = event.target.files[0];
-    setImage(file);
-  };
 
   const handleFormChange = (event) => {
     const { name, value } = event.target;
     setFormData((prevFormData) => ({
       ...prevFormData,
       [name]: value,
-      
     }));
   };
 
+  const handleImageUpload = (event) => {
+    const file = event.target.files[0];
+    setImage(file);
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -80,22 +76,29 @@ export default function FormAddProduct() {
       return;
     }
 
-    const formDataWithImage = new FormData();
-    formDataWithImage.append('name', formData.name);
-    formDataWithImage.append('quantity', formData.quantity);
-    formDataWithImage.append('price', formData.price);
-    formDataWithImage.append('weight', formData.weight);
-    formDataWithImage.append('image', image);
+    // const data = new FormData();
+    // data.append('name', formData.name);
+    // data.append('quantity', formData.quantity);
+    // data.append('price', formData.price);
+    // data.append('weight', formData.weight);
+    // data.append('image', image);
+    // console.log("the data is:");
+    // console.log(data);
+    // const requestOptions = {
+    //   method: 'POST',
+    //   body: data,
+    // };
 
     fetch('http://localhost:8080/api/v1/additem', {
       method: 'POST',
-      body: formDataWithImage,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
     })
       .then((response) => response.json())
       .then((data) => console.log(data))
       .catch((error) => console.error(error));
-    console.log(formData);
-    console.log(image);
 };
 
 
@@ -172,11 +175,9 @@ export default function FormAddProduct() {
             id="image"
             name="image"
             type="file"
-            className="form-control"
-            
             accept="image/*"
             onChange={handleImageUpload}
-            
+            value={formData.image}
           />
           </div>
           </Box>
