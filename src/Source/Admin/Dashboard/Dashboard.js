@@ -1,4 +1,5 @@
-import {Chart, MonthChart} from '../Reports/chart';
+import { useEffect, useState } from 'react';
+import { Chart, MonthChart } from '../Reports/chart';
 import * as React from 'react';
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -23,9 +24,24 @@ import { Card } from '@mui/material';
 
 export default function DashboardContent() {
   const [open, setOpen] = React.useState(true);
-  const toggleDrawer = () => {
+   const [humidity, setHumidity] = useState(null);
+   const [temperature, setTemperature] = useState(null);
+   const toggleDrawer = () => {
     setOpen(!open);
-  };
+   };
+  
+   useEffect(() => {
+    // Fetch humidity and temperature data from API
+    fetch('http://localhost:8080/api/v1/data')
+      .then(response => response.json())
+      .then(data => {
+        setHumidity(data.humidity);
+        setTemperature(data.temperature);
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      });
+  }, []);
 
   return (
     <ThemeProvider theme={mdTheme}>
@@ -100,6 +116,44 @@ export default function DashboardContent() {
                   <TodaySales />
                 </Card>
               </Grid>
+
+               <Grid item xs={12} sm={6} md={3}>
+              <Card
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  padding: '24px',
+                }}
+              >
+                <Typography variant="h6" gutterBottom>
+                  Temperature
+                </Typography>
+                <Typography variant="h4" fontWeight="bold" color="primary">
+                  {temperature != null ? `${temperature}°C` : 'Loading...'}
+                </Typography>
+              </Card>
+            </Grid>
+            <Grid item xs={12} sm={6} md={3}>
+              <Card
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  padding: '24px',
+                }}
+              >
+                <Typography variant="h6" gutterBottom>
+                  Humidity
+                </Typography>
+                <Typography variant="h4" fontWeight="bold" color="secondary">
+                  {humidity != null ? `${humidity}%` : 'Loading...'}
+                </Typography>
+              </Card>
+            </Grid>
+          
 
               {Chart}
               <Grid item xs={12}>
