@@ -8,34 +8,29 @@ import Box from '@mui/material/Box';
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   container: {
-    padding: theme.spacing(3),
+    padding: '10px'
   },
   buttonContainer: {
     display: 'flex',
     justifyContent: 'flex-end',
-    marginTop: theme.spacing(3),
+    marginTop: '20px',
   },
-  imageContainer: { 
-  border: `1px solid ${theme.palette.grey[500]}`,
-  borderRadius: theme.shape.borderRadius,
-  padding: theme.spacing(0.5), // Updated padding to 0.5
-  position: 'relative',
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  height: 200,
-  maxWidth: 200,
-  '& img': {
-    width: '100%', // Set width to 100%
-    height: '100%', // Set height to 100%
-    objectFit: 'contain', // Maintain aspect ratio of image
-      },
+  imageContainer: {
+    border: '1px solid grey', // Replace with your desired border style
+    borderRadius: '4px', // Replace with your desired border radius value or CSS property
+    padding: '5px', // Replace with your desired padding value or CSS property
+    position: 'relative',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '200px', // Replace with your desired height value or CSS property
+    maxWidth: '200px', // Replace with your desired max width value or CSS property
   
-},
+  },
   formControl: {
-    marginBottom: theme.spacing(2),
+    marginBottom: '20px',
     minWidth: 120,
   },
 }));
@@ -76,19 +71,6 @@ export default function FormAddProduct() {
       return;
     }
 
-    // const data = new FormData();
-    // data.append('name', formData.name);
-    // data.append('quantity', formData.quantity);
-    // data.append('price', formData.price);
-    // data.append('weight', formData.weight);
-    // data.append('image', image);
-    // console.log("the data is:");
-    // console.log(data);
-    // const requestOptions = {
-    //   method: 'POST',
-    //   body: data,
-    // };
-
     fetch('http://localhost:8080/api/v1/additem', {
       method: 'POST',
       headers: {
@@ -99,8 +81,7 @@ export default function FormAddProduct() {
       .then((response) => response.json())
       .then((data) => console.log(data))
       .catch((error) => console.error(error));
-};
-
+  };
 
   return (
     <form onSubmit={handleSubmit}>
@@ -124,8 +105,7 @@ export default function FormAddProduct() {
             label="Product Name"
             variant="outlined"
             value={formData.name}
-            onChange = {handleFormChange}
-            // defaultValue={product.name || ""}
+            onChange={handleFormChange}
           />
         </Grid>
         <Grid item xs={12} md={6}>
@@ -136,9 +116,8 @@ export default function FormAddProduct() {
             label="Quantity"
             variant="outlined"
             value={formData.quantity}
-            onChange = {handleFormChange}
+            onChange={handleFormChange}
             type="number"
-            // defaultValue={product.quantity||""}
           />
         </Grid>
         <Grid item xs={12} md={6}>
@@ -151,7 +130,6 @@ export default function FormAddProduct() {
             value={formData.price}
             onChange={handleFormChange}
             type="number"
-            // defaultValue={product.price||""}
           />
         </Grid>
         <Grid item xs={12} md={6}>
@@ -164,39 +142,39 @@ export default function FormAddProduct() {
             value={formData.weight}
             onChange={handleFormChange}
             type="number"
-            // defaultValue={product.weight||""}
           />
         </Grid>
         <Grid item xs={12} md={6}>
           <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', pb: 2 }}>
             <div>
-          <label htmlFor="image-upload">Product Image </label>
-          <input
-            id="image"
-            name="image"
-            type="file"
-            accept="image/*"
-            onChange={handleImageUpload}
-            value={formData.image}
-          />
-          </div>
+              <label htmlFor="image-upload">Product Image </label>
+              <input
+                id="image"
+                name="image"
+                type="file"
+                accept="image/*"
+                onChange={handleImageUpload}
+                value={formData.image}
+              />
+            </div>
           </Box>
-          
-          
-            <div className={classes.imageContainer}>
-              {image && (
-            <div>
-            <img src={URL.createObjectURL(image)} alt="product image" style={{maxWidth:200, maxHeight:200}} loading="lazy" />
-          </div>
-          )}
-          {!image && (<div>
+          <div className={classes.imageContainer}>
+            {image && (
+              <div>
+                <img src={URL.createObjectURL(image)} alt="product image" style={{ maxWidth: 200, maxHeight: 200 }} loading="lazy" />
+              </div>
+            )}
+            {!image && (
+              <div>
                 <img
-              src={"https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Antu_insert-image.svg/2048px-Antu_insert-image.svg.png"} alt = "product image" style={{maxWidth:200, maxHeight:200}} loading="lazy"
-            />
-          </div>)}
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Antu_insert-image.svg/2048px-Antu_insert-image.svg.png"
+                  alt="product image"
+                  style={{ maxWidth: 200, maxHeight: 200 }}
+                  loading="lazy"
+                />
+              </div>
+            )}
           </div>
-          
-        
         </Grid>
         <Grid item xs={12} className={classes.buttonContainer}>
           <Button variant="contained" color="primary" onClick={handleSubmit}>

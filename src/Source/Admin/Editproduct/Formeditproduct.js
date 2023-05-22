@@ -8,21 +8,21 @@ import Box from '@mui/material/Box';
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    padding: theme.spacing(3),
+    padding: '10px',
   },
   buttonContainer: {
     display: 'flex',
     justifyContent: 'flex-end',
-    marginTop: theme.spacing(3),
+    marginTop: '20px',
   },
   imageContainer: { 
-    border: `1px solid ${theme.palette.grey[500]}`, // Set border color to grey[500]
-    borderRadius: theme.shape.borderRadius, // Set border radius to match theme shape
-    padding: theme.spacing(1),
+    border: `1px solid grey`, // Set border color to grey[500]
+    borderRadius: '4px', // Set border radius to match theme shape
+    padding: '5px',
     position: 'relative', // Set position to relative so we can position the background line absolutely
   },
   formControl: {
-    marginBottom: theme.spacing(2),
+    marginBottom: '10px',
     minWidth: 120,
   },
 }));
