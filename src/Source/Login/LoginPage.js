@@ -14,26 +14,34 @@ export default function LoginPage() {
   const [errorMessage, setErrorMessage] = React.useState(null);
 
   const handleLogin = async () => {
-    const email = document.querySelector('input[name="email"]').value;
-    const password = document.querySelector('input[name="password"]').value;
+  const email = document.querySelector('input[name="email"]').value;
+  const password = document.querySelector('input[name="password"]').value;
 
-    const response = await fetch('http://localhost:8080/api/v1/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ email, password }),
-    });
+  // Check if the entered email and password match the admin credentials
+  if (email === 'admin' && password === 'admin') {
+    // Redirect to /dashboard for admin
+    history.push('/dashboard');
+    return; // Exit the function to prevent further API calls
+  }
 
-    if (response.ok) {
-      const data = await response.json();
-      history.push('/item');
-    } else {
-      const error = await response.json();
-      console.error(error);
-      setErrorMessage(error.message);
-    }
-  };
+  const response = await fetch('http://localhost:8080/api/v1/login', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ email, password }),
+  });
+
+  if (response.ok) {
+    const data = await response.json();
+    history.push('/item'); // Redirect to /item for regular users
+  } else {
+    const error = await response.json();
+    console.error(error);
+    setErrorMessage(error.message);
+  }
+};
+
 
   return (
     <CssVarsProvider>
